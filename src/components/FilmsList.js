@@ -1,12 +1,15 @@
 //import React from "react";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-function Filme({ source }) {
+function Filme({ source, id }) {
   return (
     <FILME>
-      <img src={source} alt="filme" />
+    <Link to={`/sessoes/${id}`}>
+        <img src={source} alt="filme" />
+    </Link>
     </FILME>
   );
 }
@@ -30,8 +33,8 @@ export default function FilmsList() {
         <span>Selecione o filme</span>
       </INSTRUCAO>
       <LISTA_FILMES>
-        {film.map((film) => (
-          <Filme source={film.posterURL} />
+        {film.map((film, index) => (
+          <Filme key={index} source={film.posterURL} id={film.id} />
         ))}
       </LISTA_FILMES>
     </>
@@ -39,7 +42,7 @@ export default function FilmsList() {
 }
 const INSTRUCAO = styled.div`
   width: 100%;
-  height: 120px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,11 +65,10 @@ const LISTA_FILMES = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   align-items: center;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding:20px;
 `;
 
 const FILME = styled.div`
