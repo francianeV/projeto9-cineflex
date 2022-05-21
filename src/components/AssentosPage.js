@@ -41,7 +41,7 @@ export default function AssentosPage(){
                 <span>Selecione o(s) assento(s)</span>
             </INSTRUCAO>
             
-            
+            <button>Reservar assentos</button>
             <FOOTER>
                 <FILME>
                     <img src={chosenMovie.posterURL} alt={chosenMovie.title} /> 
