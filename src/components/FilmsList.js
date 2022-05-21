@@ -34,12 +34,17 @@ export default function FilmsList() {
       </INSTRUCAO>
       <LISTA_FILMES>
         {film.map((film, index) => (
-          <Filme key={index} source={film.posterURL} id={film.id} />
+          <Filme 
+            key={index} 
+            source={film.posterURL} 
+            id={film.id} />
         ))}
       </LISTA_FILMES>
     </>
   );
 }
+
+
 const INSTRUCAO = styled.div`
   width: 100%;
   height: 100px;
