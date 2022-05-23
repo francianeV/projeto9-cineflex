@@ -29,23 +29,23 @@ export default function FilmsList() {
 
   return (
     <>
-      <INSTRUCAO>
+      <Instrucao>
         <span>Selecione o filme</span>
-      </INSTRUCAO>
-      <LISTA_FILMES>
+      </Instrucao>
+      <ListaFilmes>
         {film.map((film, index) => (
           <Filme 
             key={index} 
             source={film.posterURL} 
             id={film.id} />
         ))}
-      </LISTA_FILMES>
+      </ListaFilmes>
     </>
   );
 }
 
 
-const INSTRUCAO = styled.div`
+const Instrucao = styled.div`
   width: 100%;
   height: 100px;
   display: flex;
@@ -66,7 +66,7 @@ const INSTRUCAO = styled.div`
   }
 `;
 
-const LISTA_FILMES = styled.div`
+const ListaFilmes = styled.div`
   width: 100%;
   height: auto;
   display: flex;

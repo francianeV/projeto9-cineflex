@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 function Assentos({name, cor, borda, id, isAvailable,setSelecionado, selecionado, setAssentos, assentos}){
 
-    const [escolhido, setEscolhido] = useState('')
+    const [escolhido, setEscolhido] = useState(null)
 
 
     function selecionarAssento() {
@@ -25,7 +25,7 @@ function Assentos({name, cor, borda, id, isAvailable,setSelecionado, selecionado
     }    
 
     return(
-        <ASSENTO cor={cor} borda={borda} isAvailable={isAvailable} onClick={selecionarAssento}><span>{name}</span></ASSENTO>
+        <Assento cor={!isAvailable ? '#FBE192' : escolhido ? '#8DD7CF' : '#C3CFD9'} borda= {!isAvailable ? '#F7C52B' : escolhido ? '#1AAE9E' : '#7B8B99'} isAvailable={isAvailable} onClick={selecionarAssento}><span>{name}</span></Assento>
     );
 
 
@@ -35,25 +35,25 @@ function Assentos({name, cor, borda, id, isAvailable,setSelecionado, selecionado
 function Legenda(){
     return(
         <>
-            <STATUS_ASSENTO>
-                <COR_STATUS cor='#8DD7CF' borda='#1AAE9E'></COR_STATUS>
+            <StatusAssento>
+                < CorStatus cor='#8DD7CF' borda='#1AAE9E'></ CorStatus>
                  <h3>Selecionado</h3>
-            </STATUS_ASSENTO>
-            <STATUS_ASSENTO>
-                <COR_STATUS cor='#C3CFD9' borda='#7B8B99'></COR_STATUS>
+            </StatusAssento>
+            <StatusAssento>
+                < CorStatus cor='#C3CFD9' borda='#7B8B99'></ CorStatus>
                 <h3>Disponível</h3>
-            </STATUS_ASSENTO>
-            <STATUS_ASSENTO>
-                <COR_STATUS cor='#FBE192' borda='#F7C52B'></COR_STATUS>
+            </StatusAssento>
+            <StatusAssento>
+                < CorStatus cor='#FBE192' borda='#F7C52B'></ CorStatus>
                 <h3>Indisponivel</h3>
-            </STATUS_ASSENTO>
+            </StatusAssento>
         </>
 
     );
     
 }
 
-export default function AssentosPage({CPF, setCPF, nome, setNome, setInfo, info, setSeats, setSelecionado, selecionado, setAssentos, assentos, chosenMovie, setChosenMovie, movie, setMovie, setInfos, infos}){
+export default function AssentosPage({CPF, setCPF, nome, setNome, setInfo, info, seats, setSeats, setSelecionado, selecionado, setAssentos, assentos, chosenMovie, setChosenMovie, movie, setMovie, setInfos, infos}){
     const navigate = useNavigate();
     const {idSessao} = useParams();
 
@@ -92,45 +92,45 @@ export default function AssentosPage({CPF, setCPF, nome, setNome, setInfo, info,
     
     return(
         <>
-            <ASSENTOS_PAGE>
-                <INSTRUCAO>
+            <Main>
+                <Instrucao>
                     <span>Selecione o(s) assento(s)</span>
-                </INSTRUCAO>
-                <ASSENTOS>
-                    {info?.seats.map((seat, index) => <Assentos
-                        key={index}
-                        id={seat.id}
-                        name={seat.name}
-                        cor={!seat.isAvailable ? '#FBE192' : '#C3CFD9'}
-                        borda={seat.isAvailable ? '#7B8B99' : '#F7C52B'}
-                        isAvailable={seat.isAvailable}
-                        setSelecionado={setSelecionado}
-                        selecionado={selecionado}
-                        setAssentos={setAssentos}
-                        assentos={assentos}
-                    />) }
-                </ASSENTOS>
-                <LEGENDA>
+                </Instrucao>
+                <ContainerAssentos>
+                    {seats.map((seat, index) => 
+                        <Assentos
+                            key={index}
+                            id={seat.id}
+                            name={seat.name}
+                            isAvailable={seat.isAvailable}
+                            setSelecionado={setSelecionado}
+                            selecionado={selecionado}
+                            setAssentos={setAssentos}
+                            assentos={assentos} 
+                        />)}
+
+                </ContainerAssentos>
+                <ContainerLegenda>
                     <Legenda />
-                </LEGENDA>
-                <FORMULARIO onSubmit={enviarInfos}>
+                </ContainerLegenda>
+                <Formulario onSubmit={enviarInfos}>
                     <label htmlFor="campoNome">Nome do comprador:</label>
                     <input id="campoNome" type="nome" value={nome} placeholder="Digite seu nome..." required onChange={e => setNome(e.target.value)}></input>
                     <label htmlFor="campoCPF">CPF do comprador:</label>
                     <input id="campoCPF" type="cpf" value={CPF} placeholder="Digite seu CPF..." pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})" required onChange={e => setCPF(e.target.value)}></input>
                     <button><span>Reservar assentos</span></button>
-                </FORMULARIO>
-            </ASSENTOS_PAGE>
-                <FOOTER> 
-                    <FILME>
-                        <img src={chosenMovie.posterURL} alt={chosenMovie.title} />
-                    </FILME>
+                </Formulario>
+            </Main>
+            <Footer> 
+                <Filme>
+                    <img src={chosenMovie.posterURL} alt={chosenMovie.title} />
+                </Filme>
                    
-                    <INFO_SESSAO>
-                        <span>{chosenMovie.title}</span>
-                        <span>{infos.weekday} - {movie.name}</span>
-                    </INFO_SESSAO>
-                </FOOTER>
+                <InfoSessao>
+                    <span>{chosenMovie.title}</span>
+                    <span>{infos.weekday} - {movie.name}</span>
+                </InfoSessao>
+            </Footer>
         </>
         );
 
@@ -138,7 +138,7 @@ export default function AssentosPage({CPF, setCPF, nome, setNome, setInfo, info,
 
 
 
-const INSTRUCAO = styled.div`
+const Instrucao = styled.div`
   width: 100%;
   height: 120px;
   display: flex;
@@ -159,7 +159,7 @@ const INSTRUCAO = styled.div`
   }
 `;
 
-const FOOTER = styled.div`
+const Footer = styled.div`
     width: 100%;
     height: 117px;
     bottom: 0px;
@@ -188,7 +188,7 @@ const FOOTER = styled.div`
     }
 `;
 
-const FILME = styled.div`
+const Filme = styled.div`
     width: 64px;
     height: 89px;
     left: 10px;
@@ -202,13 +202,13 @@ const FILME = styled.div`
     margin-left: 15px;
 `;
 
-const INFO_SESSAO = styled.div`
+const InfoSessao = styled.div`
     display: flex;
     flex-direction: column;
     
 `;
 
-const FORMULARIO = styled.form`
+const Formulario = styled.form`
 
     padding: 20px;
     margin-top: 25px;
@@ -268,7 +268,7 @@ const FORMULARIO = styled.form`
     }
 `;
 
-const ASSENTO = styled.div`
+const Assento = styled.div`
     width: 26px;
     height: 26px;
     left: 24px;
@@ -287,7 +287,7 @@ const ASSENTO = styled.div`
 
 `;
 
-const ASSENTOS = styled.div`
+const ContainerAssentos = styled.div`
     width: 330px;
     height: 200px;
     display: flex;
@@ -309,13 +309,13 @@ const ASSENTOS = styled.div`
     }
 `;
 
-const ASSENTOS_PAGE = styled.div`
+const Main = styled.div`
     width: 400px;
     height: auto;
     margin: 0 auto;
 `;
 
-const LEGENDA = styled.div`
+const ContainerLegenda = styled.div`
     width: 400px;
     height: auto;
     margin: 0 auto;
@@ -323,7 +323,7 @@ const LEGENDA = styled.div`
     justify-content: center; 
 `;
 
-const STATUS_ASSENTO = styled.div`
+const StatusAssento = styled.div`
     width: auto;
     display:flex;
     flex-direction: column;
@@ -344,7 +344,7 @@ const STATUS_ASSENTO = styled.div`
     }
 `;
 
-const COR_STATUS = styled.div`
+const CorStatus = styled.div`
     width: 26px;
     height: 26px;
     background:  ${props => props.cor};

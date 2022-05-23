@@ -7,9 +7,9 @@ import styled from "styled-components";
 function Sessao({weekday, date, showtimes, id}){
     return(
         <>
-        <SESSAO>
+        <SessaoData>
             <h3>{weekday}-{date}</h3>
-        </SESSAO>
+        </SessaoData>
         {showtimes.map((showtime, index) => (
             <Showtime 
                 key={index} 
@@ -26,9 +26,9 @@ function Sessao({weekday, date, showtimes, id}){
 function Showtime({showtime, id}){
     return(
         <Link to={`/assentos/${id}`}>
-        <HORARIOS>
+        <Horarios>
             <span>{showtime}</span>
-        </HORARIOS>
+        </Horarios>
         </Link> 
     );
 }
@@ -49,10 +49,10 @@ export default function SessaoPage(){
 
     return(
         <>
-        <INSTRUCAO>
+        <Instrucao>
             <span>Selecione o horario</span>
-        </INSTRUCAO>
-        <SESSOES>
+        </Instrucao>
+        <Sessoes>
             {days.map((data) => {
                 return (
                     <Sessao 
@@ -64,18 +64,18 @@ export default function SessaoPage(){
                      
                 )
             })}
-        </SESSOES>
-        <FOOTER>
-            <FILME>
+        </Sessoes>
+        <Footer>
+            <Filme>
                 <img src={sessao.posterURL} alt={sessao.title} />
-            </FILME>
+            </Filme>
             <span>{sessao.title}</span>
-        </FOOTER>
+        </Footer>
         </>
     );
 }
 
-const INSTRUCAO = styled.div`
+const Instrucao = styled.div`
   width: 100%;
   height: 120px;
   display: flex;
@@ -96,7 +96,7 @@ const INSTRUCAO = styled.div`
   }
 `;
 
-const SESSAO = styled.div`
+const SessaoData = styled.div`
     width: 100%;
     height: 50px;
 
@@ -115,13 +115,14 @@ const SESSAO = styled.div`
 
 `;
 
-const SESSOES = styled.div` 
-    width: 100%;
+const Sessoes = styled.div` 
+    width: 400px;
     height: auto;
     padding: 20px;
+    margin: 0 auto;
 `;
 
-const FOOTER = styled.div`
+const Footer = styled.div`
     width: 100%;
     height: 117px;
     bottom: 0px;
@@ -148,7 +149,7 @@ const FOOTER = styled.div`
     }
 `;
 
-const FILME = styled.div`
+const Filme = styled.div`
     width: 64px;
     height: 89px;
     left: 10px;
@@ -162,7 +163,7 @@ const FILME = styled.div`
     margin-left: 15px;
 `;
 
-const HORARIOS = styled.button` 
+const Horarios = styled.button` 
     width: 83px;
     height: 43px;
     background: #E8833A;
