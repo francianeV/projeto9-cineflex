@@ -37,7 +37,6 @@ export default function SessaoPage(){
     const {idFilme} = useParams();
     const [sessao, setSessao] = useState({})
     const [days, setDays] = useState([]);
-    const [erro, setErro] = useState(false);
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
@@ -45,9 +44,6 @@ export default function SessaoPage(){
         promise.then((response) => {
             setSessao(response.data)
             setDays(response.data.days)
-        })
-        .catch(res => {
-            setErro(true);
         })
     },[])
 
