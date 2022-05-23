@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect} from "react";
 import styled from "styled-components";
 
-function Assentos({name, cor, borda, id, isAvailable,setSelecionado, selecionado, setAssentos, assentos}){
+function Assentos({name, id, isAvailable,setSelecionado, selecionado, setAssentos, assentos}){
 
     const [escolhido, setEscolhido] = useState(null)
 
