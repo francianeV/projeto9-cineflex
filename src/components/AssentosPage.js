@@ -7,7 +7,6 @@ function Assentos({name, cor, borda, id, isAvailable,setSelecionado, selecionado
 
     const [escolhido, setEscolhido] = useState(null)
 
-
     function selecionarAssento() {
         if(isAvailable && !escolhido) {
             setEscolhido(!escolhido)
@@ -88,8 +87,8 @@ export default function AssentosPage({CPF, setCPF, nome, setNome, setInfo, info,
               });
             promise.then(navigate("/sucesso", { replace: true }));  
             
-    }
     
+}
     return(
         <>
             <Main>
@@ -251,6 +250,10 @@ const Formulario = styled.form`
         margin-bottom: 30px;
         margin-top: 30px;
         margin-left: 44px;
+
+        :hover{
+            cursor: pointer;
+        }
 
         span{
             font-family: 'Roboto';

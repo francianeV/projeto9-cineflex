@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Top() {
+  const navigate = useNavigate();
+
   return (
     <TOP>
-      <h1>CINEFLEX</h1>
+      <h1 onClick={() => navigate('/')}>CINEFLEX</h1>
     </TOP>
   );
 }
@@ -27,5 +31,9 @@ const TOP = styled.div`
     align-items: center;
     text-align: center;
     color: orange;
+
+    :hover{
+      cursor: pointer;
+    }
   }
 `;
